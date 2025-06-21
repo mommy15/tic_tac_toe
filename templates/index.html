@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic-Tac-Toe AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2 class="title">Play Tic-Tac-Toe vs AI</h2>
+    <h3 id="status">Your Turn</h3>
+    <div class="board">
+        <table>
+            {% for i in range(3) %}
+            <tr>
+                {% for j in range(3) %}
+                <td onclick="playerMove({{ i }}, {{ j }})" id="cell-{{ i }}-{{ j }}"></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <button id="play-again" onclick="resetGame()"> Play Again</button>
+
+    <script>
+        let board = [['', '', ''], ['', '', ''], ['', '', '']];
+        let gameOver = false;
+
+        function updateCell(row, col, value) {
+            document.getElementById(`cell-${row}-${col}`).innerText = value;
+        }
+
+        function playerMove(row, col) {
+            if (board[row][col] !== '' || gameOver) return;
+            board[row][col] = 'X';
+            updateCell(row, col, 'X');
+            document.getElementById("status").innerText = "AI is thinking...";
+
+            if (checkGameOver()) return;
+
+            setTimeout(() => {
+                fetch('/move', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ board: board })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    const r = data.row, c = data.col;
+                    if (r !== -1 && c !== -1) {
+                        board[r][c] = 'O';
+                        updateCell(r, c, 'O');
+                        checkGameOver();
+                    }
+                    if (!gameOver) {
+                        document.getElementById("status").innerText = "Your Turn";
+                    }
+                });
+            }, 800);
+        }
+
+        function checkGameOver() {
+            const winner = getWinner();
+            if (winner) {
+                document.getElementById("status").innerText = winner === 'X' ? "You Win!" : "AI Wins!";
+                gameOver = true;
+                return true;
+            } else if (isBoardFull()) {
+                document.getElementById("status").innerText = "It's a Tie!";
+                gameOver = true;
+                return true;
+            }
+            return false;
+        }
+
+        function getWinner() {
+            // Rows, Columns, Diagonals
+            const lines = [
+                // Rows
+                [[0,0],[0,1],[0,2]],
+                [[1,0],[1,1],[1,2]],
+                [[2,0],[2,1],[2,2]],
+                // Columns
+                [[0,0],[1,0],[2,0]],
+                [[0,1],[1,1],[2,1]],
+                [[0,2],[1,2],[2,2]],
+                // Diagonals
+                [[0,0],[1,1],[2,2]],
+                [[0,2],[1,1],[2,0]]
+            ];
+
+            for (let line of lines) {
+                const [a, b, c] = line;
+                if (board[a[0]][a[1]] && board[a[0]][a[1]] === board[b[0]][b[1]] && board[a[0]][a[1]] === board[c[0]][c[1]]) {
+                    return board[a[0]][a[1]];
+                }
+            }
+            return null;
+        }
+
+        function isBoardFull() {
+            for (let row of board) {
+                for (let cell of row) {
+                    if (cell === '') return false;
+                }
+            }
+            return true;
+        }
+
+        function resetGame() {
+            board = [['', '', ''], ['', '', ''], ['', '', '']];
+            gameOver = false;
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    const cell = document.getElementById(`cell-${i}-${j}`);
+                    cell.innerText = '';
+                    cell.onclick = () => playerMove(i, j);
+                }
+            }
+            document.getElementById("status").innerText = "Your Turn";
+        }
+    </script>
+</body>
+</html>
