@@ -6,7 +6,7 @@
 
 # TIC_TAC_TOE
 
-<em>Master Strategy, Outsmart Opponents, Play with Confidence</em>
+<em>Outsmart, Play, Win—Unleash Your Strategic Edge</em>
 
 <!-- BADGES -->
 <img src="https://img.shields.io/github/last-commit/mommy15/tic_tac_toe?style=flat&logo=git&logoColor=white&color=0080ff" alt="last-commit">
@@ -15,6 +15,7 @@
 
 <em>Built with the tools and technologies:</em>
 
+<img src="https://img.shields.io/badge/Markdown-000000.svg?style=flat&logo=Markdown&logoColor=white" alt="Markdown">
 <img src="https://img.shields.io/badge/Python-3776AB.svg?style=flat&logo=Python&logoColor=white" alt="Python">
 
 </div>
@@ -39,17 +40,17 @@
 
 ## Overview
 
-tic_tac_toe is an open-source web application that combines a simple user interface with a powerful AI engine to deliver an engaging Tic-Tac-Toe experience. Built with a clear separation of concerns, it demonstrates how to integrate AI decision-making into interactive web apps efficiently.
+tic_tac_toe is a full-stack web application that enables users to play Tic-Tac-Toe against an AI opponent through an intuitive web interface. It seamlessly integrates backend game logic, AI decision-making, and frontend interaction to deliver an engaging experience.
 
 **Why tic_tac_toe?**
 
-This project provides a straightforward yet robust example of embedding AI logic into web applications. The core features include:
+This project offers a strategic, interactive game experience with a focus on AI implementation. The core features include:
 
-- 🧠 **[Emoji] AI Decision Engine:** Implements an optimal move selection using minimax with alpha-beta pruning, ensuring challenging gameplay.
-- 🌐 **[Emoji] Web Server:** Handles user interactions, game rendering, and move processing, enabling real-time gameplay.
-- 🎮 **[Emoji] Interactive Frontend:** Offers an intuitive interface for players to engage with the game and see updates instantly.
-- 🔄 **[Emoji] Seamless Backend-Frontend Communication:** Facilitates smooth data exchange for a fluid user experience.
-- 🛠️ **[Emoji] Modular Architecture:** Promotes maintainability and easy extension of game features.
+- **🧠** **AI Decision Engine:** Implements minimax with alpha-beta pruning for optimal move selection, demonstrating advanced AI algorithms.
+- **🌐** **Web Server:** Manages user interactions, game rendering, and move processing, ensuring smooth gameplay.
+- **🎮** **Interactive Frontend:** Provides a responsive web interface that updates in real-time and handles user inputs effortlessly.
+- **🔄** **Game Management:** Supports game resets and outcome detection, enhancing user engagement.
+- **🔧** **Modular Architecture:** Facilitates easy customization and integration into larger projects.
 
 ---
 
@@ -57,15 +58,15 @@ This project provides a straightforward yet robust example of embedding AI logic
 
 |      | Component       | Details                                                                                     |
 | :--- | :-------------- | :------------------------------------------------------------------------------------------ |
-| ⚙️  | **Architecture**  | <ul><li>Single-page application with HTML frontend</li><li>Python backend for game logic</li></ul> |
-| 🔩 | **Code Quality**  | <ul><li>Clear separation of concerns between UI and logic</li><li>Readable, concise Python code</li></ul> |
-| 📄 | **Documentation** | <ul><li>Basic README with project overview</li><li>Inline comments in code for functions</li></ul> |
-| 🔌 | **Integrations**  | <ul><li>HTML for UI rendering</li><li>Python scripts for game state management</li></ul> |
-| 🧩 | **Modularity**    | <ul><li>Separate modules for game logic and UI</li><li>Functions for move validation, game status</li></ul> |
-| 🧪 | **Testing**       | <ul><li>Limited or no automated tests observed</li><li>Potential for unit tests on game logic functions</li></ul> |
-| ⚡️  | **Performance**   | <ul><li>Lightweight, runs efficiently in browser</li><li>Minimal computational overhead</li></ul> |
-| 🛡️ | **Security**      | <ul><li>Basic, no authentication or data security measures</li><li>Client-side game logic only</li></ul> |
-| 📦 | **Dependencies**  | <ul><li>Python standard library</li><li>HTML for frontend</li></ul> |
+| ⚙️  | **Architecture**  | <ul><li>Single Python script managing game logic and user interface</li><li>Procedural design with minimal abstraction</li></ul> |
+| 🔩 | **Code Quality**  | <ul><li>Basic Python conventions followed</li><li>Limited modularity; mostly monolithic code</li></ul> |
+| 📄 | **Documentation** | <ul><li>README provides overview and instructions</li><li>Inline comments present but sparse</li></ul> |
+| 🔌 | **Integrations**  | <ul><li>No external APIs or services integrated</li><li>Uses standard Python libraries only</li></ul> |
+| 🧩 | **Modularity**    | <ul><li>Minimal; core functions tightly coupled</li><li>Potential for refactoring into classes/modules</li></ul> |
+| 🧪 | **Testing**       | <ul><li>No formal testing framework detected</li><li>Possible manual testing only</li></ul> |
+| ⚡️  | **Performance**   | <ul><li>Efficient for small-scale game</li><li>No performance bottlenecks identified</li></ul> |
+| 🛡️ | **Security**      | <ul><li>Not applicable; local game with no security concerns</li></ul> |
+| 📦 | **Dependencies**  | <ul><li>Relies on Python standard library</li><li>No external packages or dependencies</li></ul> |
 
 ---
 
@@ -73,12 +74,13 @@ This project provides a straightforward yet robust example of embedding AI logic
 
 ```sh
 └── tic_tac_toe/
+    ├── README.md
     ├── __pycache__
     │   └── ai.cpython-313.pyc
     ├── ai.py
     ├── app.py
     ├── static
-    │   ├── Codsoft task 1.mp4
+    │   ├── output.mp4
     │   └── style.css
     └── templates
         └── index.html
@@ -105,11 +107,15 @@ This project provides a straightforward yet robust example of embedding AI logic
 			</thead>
 				<tr style='border-bottom: 1px solid #eee;'>
 					<td style='padding: 8px;'><b><a href='https://github.com/mommy15/tic_tac_toe/blob/master/app.py'>app.py</a></b></td>
-					<td style='padding: 8px;'>- Provides the core web server for a Tic-Tac-Toe application, enabling user interaction through a web interface<br>- Handles rendering the main page and processing move requests by integrating AI logic to determine optimal moves<br>- Facilitates seamless communication between the frontend and AI module, supporting real-time gameplay within the overall application architecture.</td>
+					<td style='padding: 8px;'>- Provides the core web server for the application, enabling user interaction through a web interface and facilitating communication with the AI module<br>- It handles rendering the main page and processing move requests by determining optimal game moves, integrating frontend and backend components within the overall architecture.</td>
+				</tr>
+				<tr style='border-bottom: 1px solid #eee;'>
+					<td style='padding: 8px;'><b><a href='https://github.com/mommy15/tic_tac_toe/blob/master/README.md'>README.md</a></b></td>
+					<td style='padding: 8px;'>- Provides the core web server facilitating user interaction, game rendering, and move processing within the Tic-Tac-Toe application<br>- It manages communication between the frontend interface and the AI decision engine, enabling real-time gameplay and seamless integration of game logic into the web architecture<br>- This component is essential for delivering an engaging, interactive experience driven by strategic AI moves.</td>
 				</tr>
 				<tr style='border-bottom: 1px solid #eee;'>
 					<td style='padding: 8px;'><b><a href='https://github.com/mommy15/tic_tac_toe/blob/master/ai.py'>ai.py</a></b></td>
-					<td style='padding: 8px;'>- Implements an AI-powered decision engine for a Tic-Tac-Toe game, enabling optimal move selection through the minimax algorithm with alpha-beta pruning<br>- It evaluates game states to determine the best possible move for the computer opponent, ensuring challenging gameplay and strategic decision-making within the overall game architecture.</td>
+					<td style='padding: 8px;'>- Implements an AI-powered decision engine for Tic-Tac-Toe, enabling optimal move selection through the minimax algorithm with alpha-beta pruning<br>- Facilitates strategic gameplay by evaluating board states to identify the best move for the computer opponent, contributing to the overall architecture by providing intelligent, automated gameplay capabilities.</td>
 				</tr>
 			</table>
 		</blockquote>
@@ -129,7 +135,7 @@ This project provides a straightforward yet robust example of embedding AI logic
 			</thead>
 				<tr style='border-bottom: 1px solid #eee;'>
 					<td style='padding: 8px;'><b><a href='https://github.com/mommy15/tic_tac_toe/blob/master/templates/index.html'>index.html</a></b></td>
-					<td style='padding: 8px;'>- Facilitates an interactive web interface for playing Tic-Tac-Toe against an AI opponent<br>- Manages user interactions, updates game state visually, and communicates with the backend to determine AI moves<br>- Ensures seamless gameplay flow, handles game over conditions, and provides options to reset the game, integrating frontend controls with server-side logic within the overall application architecture.</td>
+					<td style='padding: 8px;'>- Facilitates an interactive web interface for playing Tic-Tac-Toe against an AI opponent<br>- Manages user interactions, updates game state visually, and communicates with the backend to generate AI moves<br>- Ensures seamless gameplay flow, detects game outcomes, and provides options to restart, integrating frontend controls with server-side logic within the overall application architecture.</td>
 				</tr>
 			</table>
 		</blockquote>
@@ -203,13 +209,8 @@ pytest
 
 ---
 
-<div align="left"><a href="#top">⬆ Return</a></div>
+<div align="left"><a href="#top"> Return</a></div>
 
 ---
-### 🎥 Demo Video
 
-<video width="600" controls>
-  <source src="static/output.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
 
